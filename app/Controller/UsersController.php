@@ -15,11 +15,28 @@ class UsersController extends AppController {
 	public function login() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
+				$this->_setCookie($this->Auth->user('id'));
 				$this->redirect($this->Auth->redirect());
 			} else {
 				$this->Session->setFlash(__('Invalid username or password, try again'));
 			}
 		}
+
+		if ($this->Auth->loggedIn() || $this->Auth->login()) {
+			return $this->redirect($this->Auth->redirectUrl());
+		}
+	}
+
+	protected function _setCookie($id) {
+		if (!$this->request->data('User.remember_me')) {
+			return false;
+		}
+		$data = array(
+			'username' => $this->request->data('User.username'),
+			'password' => $this->request->data('User.password')
+		);
+		$this->Cookie->write('User', $data, true, '+2 week');
+		return true;
 	}
 
 	public function logout() {

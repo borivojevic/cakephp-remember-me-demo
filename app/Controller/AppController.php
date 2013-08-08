@@ -43,6 +43,18 @@ class AppController extends Controller {
 		$this->Auth->logoutRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
 		$this->Auth->authorize = array('Controller');
 		$this->Auth->redirectUrl(array('controller' => 'posts', 'action' => 'add'));
+		$this->Auth->authenticate = array(
+			'Cookie' => array(
+				'fields' => array(
+					 'username' => 'username',
+					 'password' => 'password'
+				),
+				'userModel' => 'User',
+			),
+			'Form'
+		);
+
+		$this->Cookie->type('rijndael');
 
 		$this->set('authUser', $this->Auth->user());
 	}
