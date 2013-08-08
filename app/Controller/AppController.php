@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-	public $components = array('Auth', 'Session');
+	public $components = array('Auth', 'Session', 'Cookie');
 
 	public $helpers = array('Html', 'Form');
 
@@ -43,6 +43,8 @@ class AppController extends Controller {
 		$this->Auth->logoutRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
 		$this->Auth->authorize = array('Controller');
 		$this->Auth->redirectUrl(array('controller' => 'posts', 'action' => 'add'));
+
+		$this->set('authUser', $this->Auth->user());
 	}
 
 	public function isAuthorized($user) {
