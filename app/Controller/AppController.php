@@ -42,7 +42,7 @@ class AppController extends Controller {
 		$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'index');
 		$this->Auth->logoutRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
 		$this->Auth->authorize = array('Controller');
-		$this->Auth->redirectUrl(array('controller' => 'posts', 'action' => 'index'));
+		$this->Auth->redirectUrl(array('controller' => 'posts', 'action' => 'add'));
 	}
 
 	public function isAuthorized($user) {

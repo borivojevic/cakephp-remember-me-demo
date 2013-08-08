@@ -42,6 +42,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Post'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?></li>
+		<?php if (Auth::user('id')): ?>
+			<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?></li>
+		<?php endif; ?>
 	</ul>
 </div>
